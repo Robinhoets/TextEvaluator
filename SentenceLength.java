@@ -1,8 +1,8 @@
 public class SentenceLength {
 	
 	private List<String> paragraph;
-	private int wordCount;
-	private int periodCount;
+	private double wordCount;
+	private double periodCount;
 
 	public SentenceLength(List<String> paragraph) {
 		this.paragraph = paragraph;
@@ -12,10 +12,18 @@ public class SentenceLength {
 	
 		for(int i=0; i<paragraph.size(); i++) {
 
-			if(paragraph.get(i) != ".")
-				wordCount++;
-			if(paragraph.get(i) == ".")
-				periodCount++;
+			// get next word in paragraph 	
+			String word = paragraph.get(i);
+			// split word into an array
+			String[] wordArray = word.split("");
+
+			for(int j=0; j<wordArray.length; j++) {
+
+				if(wordArray[j].equals("."))
+					periodCount++;
+			}
+			wordCount++;
+
 		}		
 	}
 
@@ -23,7 +31,7 @@ public class SentenceLength {
 	public double rating() {
 
 		breakUp(paragraph);
-		return wordCount/periodCount;
+		return (wordCount/periodCount);
 	}
 	
 }
